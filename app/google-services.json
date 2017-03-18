@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "759819859475",
+    "firebase_url": "https://food-app-9a162.firebaseio.com",
+    "project_id": "food-app-9a162",
+    "storage_bucket": "food-app-9a162.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759819859475:android:38f87ca1d4747ed7",
+        "android_client_info": {
+          "package_name": "com.wordpress.sreeharilive.foodapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759819859475-pgv2cohrilsll3od0kuoao2nsgd7esg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf7gAQAViVciMejWdr3YMmo_Lg_MLvZXs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
