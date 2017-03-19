@@ -32,13 +32,14 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
     public FoodItemsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.activity_items_list,parent);
+        View view = inflater.inflate(R.layout.food_items_list_item,parent,false);
         return new FoodItemsListAdapter.ViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(FoodItemsListAdapter.ViewHolder holder, int position) {
+
 
         holder.nameTextView.setText(
                 foodItems.get(position).getName()
