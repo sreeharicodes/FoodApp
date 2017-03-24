@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.wordpress.sreeharilive.foodapp.R;
+import com.wordpress.sreeharilive.foodapp.util.Constants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,16 +20,16 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ItemsListActivity.class);
         switch (view.getId()){
             case R.id.vegImageView:
-                intent.putExtra("CATEGORY","VEG");
+                intent.putExtra(Constants.CATEGORY_INTENT_KEY, Constants.VEG);
                 break;
             case R.id.nonVegImageView:
-                intent.putExtra("CATEGORY","NON_VEG");
+                intent.putExtra(Constants.CATEGORY_INTENT_KEY,Constants.NON_VEG);
                 break;
             case R.id.chineseImageView:
-                intent.putExtra("CATEGORY","CHINESE");
+                intent.putExtra(Constants.CATEGORY_INTENT_KEY,Constants.CHINESE);
                 break;
             case R.id.dessertsImageView:
-                intent.putExtra("CATEGORY","DESSERT");
+                intent.putExtra(Constants.CATEGORY_INTENT_KEY,Constants.DESSERT);
                 break;
         }
         startActivity(intent);

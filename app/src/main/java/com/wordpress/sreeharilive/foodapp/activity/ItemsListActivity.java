@@ -14,10 +14,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.wordpress.sreeharilive.foodapp.R;
 import com.wordpress.sreeharilive.foodapp.adapter.FoodItemsListAdapter;
 import com.wordpress.sreeharilive.foodapp.model.FoodItem;
+import com.wordpress.sreeharilive.foodapp.util.Constants;
 
 import java.util.ArrayList;
 
 public class ItemsListActivity extends AppCompatActivity {
+
+    String selectedCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +33,12 @@ public class ItemsListActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
+        selectedCategory = getIntent().getStringExtra(Constants.CATEGORY_INTENT_KEY);
+
 
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.getReference().child("items").child("NonVeg").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("items").child(selectedCategory).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
