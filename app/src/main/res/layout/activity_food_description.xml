@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Item Name Here"
+        android:text="@string/item_name_here"
         android:id="@+id/itemNameTextView"
         android:layout_below="@id/foodItemImageView"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -50,6 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_to_cart"
+        android:background="#366881"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
         android:onClick="addItemToCart"/>
 
 

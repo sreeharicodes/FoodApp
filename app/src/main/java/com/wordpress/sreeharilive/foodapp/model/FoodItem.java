@@ -7,8 +7,10 @@ import java.io.Serializable;
  */
 
 public class FoodItem implements Serializable{
-    private String name,category,imageUrl;
+    private String name,category,imageUrl, description = "";
     private double price;
+    private int quantity = 0;
+
 
     public FoodItem(String name, String category, double price, String imageUrl) {
         this.name = name;
@@ -23,6 +25,22 @@ public class FoodItem implements Serializable{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {
