@@ -48,8 +48,9 @@ public class ItemsListActivity extends AppCompatActivity {
                     foodItems.add(
                             new FoodItem(
                                     child.child("name").getValue().toString(),
-                                    "Non Veg",
-                                    Double.parseDouble(child.child("price").getValue().toString())
+                                    selectedCategory,
+                                    Double.parseDouble(child.child("price").getValue().toString()),
+                                    child.child("imageurl").getValue().toString()
                             )
                     );
                     Log.d(child.getKey(),child.getValue().toString());

@@ -6,4 +6,5 @@ public class Constants {
     public static final String CHINESE = "CHINESE";
     public static final String DESSERT = "DESSERT";
     public static final String CATEGORY_INTENT_KEY = "CATEGORY";
+    public static final String SELECTED_ITEM_KEY = "SELECTED_ITEM";
 }

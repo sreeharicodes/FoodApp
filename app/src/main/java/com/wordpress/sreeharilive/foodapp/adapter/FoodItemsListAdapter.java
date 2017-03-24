@@ -1,6 +1,7 @@
 package com.wordpress.sreeharilive.foodapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.wordpress.sreeharilive.foodapp.R;
+import com.wordpress.sreeharilive.foodapp.activity.FoodDescriptionActivity;
 import com.wordpress.sreeharilive.foodapp.model.FoodItem;
+import com.wordpress.sreeharilive.foodapp.util.Constants;
 
 import java.util.ArrayList;
 
@@ -38,7 +42,7 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
     }
 
     @Override
-    public void onBindViewHolder(FoodItemsListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final FoodItemsListAdapter.ViewHolder holder, int position) {
 
 
         holder.nameTextView.setText(
@@ -46,10 +50,21 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
         );
 
         holder.priceTextView.setText(
-                foodItems.get(position).getPrice() + ""
+                String.valueOf(foodItems.get(position).getPrice())
         );
 
-        switch (foodItems.get(position).getName().toLowerCase()){
+        holder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FoodDescriptionActivity.class);
+                intent.putExtra(Constants.SELECTED_ITEM_KEY,foodItems.get(holder.getAdapterPosition()));
+                context.startActivity(intent);
+            }
+        });
+
+        Picasso.with(context).load(foodItems.get(position).getImageUrl()).into(holder.imageView);
+
+        /*switch (foodItems.get(position).getName().toLowerCase()){
             case "biriyani": holder.imageView.setImageResource(
                     R.mipmap.ic_launcher
             );
@@ -69,7 +84,7 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
             default: holder.imageView.setImageResource(
                     R.mipmap.ic_launcher
             );
-        }
+        }*/
 
     }
 
@@ -82,6 +97,7 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
 
         ImageView imageView;
         TextView nameTextView, priceTextView;
+        View rootView;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -89,6 +105,7 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
             imageView = (ImageView) itemView.findViewById(R.id.foodImageView);
             nameTextView = (TextView) itemView.findViewById(R.id.itemNameTextView);
             priceTextView = (TextView) itemView.findViewById(R.id.priceTextView);
+            rootView = itemView;
 
         }
     }
