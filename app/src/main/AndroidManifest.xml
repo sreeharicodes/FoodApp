@@ -21,7 +21,7 @@
         <activity android:name=".activity.FoodDescriptionActivity" />
         <activity android:name=".activity.CheckoutActivity" />
         <activity android:name=".activity.SplashActivity" />
-        <activity android:name=".activity.HistoryActivity"></activity>
+        <activity android:name=".activity.HistoryActivity"/>
     </application>
 
 </manifest>

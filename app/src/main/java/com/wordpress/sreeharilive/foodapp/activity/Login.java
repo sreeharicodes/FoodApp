@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(this,ItemsListActivity.class));
+            startActivity(new Intent(this,MainActivity.class));
             finish();
         } else {
             startActivityForResult(
@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         if (requestCode == SIGN_IN_REQUEST_CONST) {
             // Successfully signed in
             if (resultCode == ResultCodes.OK) {
-                startActivity(new Intent(this,ItemsListActivity.class));
+                startActivity(new Intent(this,MainActivity.class));
                 finish();
             } else {
                 if (resultCode == RESULT_CANCELED){
