@@ -5,4 +5,5 @@
     <string name="some_description_of_this_item">Some description of this item.</string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="item_name_here">Item Name Here</string>
+    <string name="cart">Cart</string>
 </resources>
