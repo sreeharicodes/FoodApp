@@ -19,8 +19,16 @@ public class Cart{
         return cartList;
     }
 
+    public void updateCartList(ArrayList<FoodItem> newList){
+        cartList = newList;
+    }
+
     public void addToCart(FoodItem item){
         cartList.add(item);
+    }
+
+    public void removeFromCart(FoodItem item){
+        cartList.remove(item);
     }
 
     public static Cart getInstance(){
@@ -30,4 +38,11 @@ public class Cart{
         return cart;
     }
 
+    public double getTotal(){
+        double total = 0;
+        for (FoodItem item : cartList){
+            total += item.getPrice() * item.getQuantity();
+        }
+        return total;
+    }
 }

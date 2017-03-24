@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.wordpress.sreeharilive.foodapp.Cart;
 import com.wordpress.sreeharilive.foodapp.R;
@@ -12,6 +14,7 @@ import com.wordpress.sreeharilive.foodapp.adapter.CartItemsListAdapter;
 public class CartActivity extends AppCompatActivity {
 
     RecyclerView cartRecyclerView;
+    CartItemsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,17 @@ public class CartActivity extends AppCompatActivity {
 
         cartRecyclerView.setLayoutManager(layoutManager);
 
-        CartItemsListAdapter adapter = new CartItemsListAdapter(this, Cart.getInstance().getCartList());
+        adapter = new CartItemsListAdapter(this, Cart.getInstance().getCartList());
         cartRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
+    public void checkOut(View view) {
+        Toast.makeText(this, "Total = " + Cart.getInstance().getTotal(), Toast.LENGTH_SHORT).show();
     }
 }

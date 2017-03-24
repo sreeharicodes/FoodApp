@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,12 +18,21 @@ import com.wordpress.sreeharilive.foodapp.R;
 import com.wordpress.sreeharilive.foodapp.model.FoodItem;
 import com.wordpress.sreeharilive.foodapp.util.Constants;
 
+import java.util.ArrayList;
+
 public class FoodDescriptionActivity extends AppCompatActivity {
 
     FoodItem item;
     Spinner qtySpinner;
     TextView itemNameTextView, itemDescTextView;
     ImageView itemImageView;
+
+    Button addButton,removeButton,updateButton;
+
+    boolean comingFromCart = false;
+
+    ArrayList<FoodItem> items;
+    int postion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +41,16 @@ public class FoodDescriptionActivity extends AppCompatActivity {
 
         item = (FoodItem) getIntent().getSerializableExtra(Constants.SELECTED_ITEM_KEY);
 
+        comingFromCart = getIntent().getBooleanExtra(Constants.FROM_CART_EXTRA_KEY,false);
+
         qtySpinner = (Spinner) findViewById(R.id.foodQuantitySpinner);
         itemNameTextView = (TextView) findViewById(R.id.itemNameTextView);
         itemDescTextView = (TextView) findViewById(R.id.foodItemDescriptionTextView);
         itemImageView = (ImageView) findViewById(R.id.foodItemImageView);
+
+        addButton = (Button) findViewById(R.id.addItemButton);
+        removeButton = (Button) findViewById(R.id.removeItemButton);
+        updateButton = (Button) findViewById(R.id.updateCartButton);
 
         itemNameTextView.setText(item.getName());
         itemDescTextView.setText(item.getDescription());
@@ -44,6 +60,19 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         qtySpinner.setAdapter(arrayAdapter);
 
         Picasso.with(this).load(item.getImageUrl()).into(itemImageView);
+
+        if (comingFromCart){
+            addButton.setVisibility(View.GONE);
+            removeButton.setVisibility(View.VISIBLE);
+            qtySpinner.setSelection(item.getQuantity()-1);
+            updateButton.setVisibility(View.VISIBLE);
+            items = Cart.getInstance().getCartList();
+            postion = getIntent().getIntExtra(Constants.SELECTED_ITEM_INDEX,-1);
+        }else {
+            removeButton.setVisibility(View.GONE);
+            addButton.setVisibility(View.VISIBLE);
+            updateButton.setVisibility(View.GONE);
+        }
 
 
 
@@ -72,5 +101,19 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public void removeItemFromCart(View view) {
+        items.remove(postion);
+        Cart.getInstance().updateCartList(items);
+        finish();
+    }
+
+    public void updateCartItem(View view) {
+        item.setQuantity((int)qtySpinner.getSelectedItem());
+        items.remove(postion);
+        items.add(postion,item);
+        Cart.getInstance().updateCartList(items);
+        finish();
     }
 }

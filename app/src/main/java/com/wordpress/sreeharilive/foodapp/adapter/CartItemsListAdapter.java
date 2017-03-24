@@ -42,7 +42,7 @@ public class CartItemsListAdapter extends RecyclerView.Adapter<CartItemsListAdap
     }
 
     @Override
-    public void onBindViewHolder(final CartItemsListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final CartItemsListAdapter.ViewHolder holder, final int position) {
 
 
         holder.nameTextView.setText(
@@ -57,7 +57,9 @@ public class CartItemsListAdapter extends RecyclerView.Adapter<CartItemsListAdap
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FoodDescriptionActivity.class);
+                intent.putExtra(Constants.FROM_CART_EXTRA_KEY,true);
                 intent.putExtra(Constants.SELECTED_ITEM_KEY,foodItems.get(holder.getAdapterPosition()));
+                intent.putExtra(Constants.SELECTED_ITEM_INDEX,position);
                 context.startActivity(intent);
             }
         });

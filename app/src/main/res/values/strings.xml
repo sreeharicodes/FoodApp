@@ -6,4 +6,7 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="item_name_here">Item Name Here</string>
     <string name="cart">Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="remove_item">Remove Item</string>
+    <string name="update_cart">Update Cart</string>
 </resources>
