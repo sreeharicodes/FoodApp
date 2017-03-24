@@ -10,4 +10,80 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wordpress.sreeharilive.foodapp.activity.MainActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="centerInside"
+                android:id="@+id/vegImageView"
+                android:onClick="launchMenu"
+                android:contentDescription="@string/veg"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="centerInside"
+                android:id="@+id/nonVegImageView"
+                android:onClick="launchMenu"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="centerInside"
+                android:id="@+id/chineseImageView"
+                android:onClick="launchMenu"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="centerInside"
+                android:id="@+id/dessertsImageView"
+                android:onClick="launchMenu"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher"
+                android:layout_weight="1"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="centerInside"
+                android:layout_weight="1"/>
+
+        </LinearLayout>-->
+    </LinearLayout>
+
 </RelativeLayout>
