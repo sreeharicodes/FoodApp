@@ -50,7 +50,8 @@ public class ItemsListActivity extends AppCompatActivity {
                                     child.child("name").getValue().toString(),
                                     selectedCategory,
                                     Double.parseDouble(child.child("price").getValue().toString()),
-                                    child.child("imageurl").getValue().toString()
+                                    child.child("imageurl").getValue().toString(),
+                                    child.child("description").getValue().toString()
                             )
                     );
                     Log.d(child.getKey(),child.getValue().toString());
