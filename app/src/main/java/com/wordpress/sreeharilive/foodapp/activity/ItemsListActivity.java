@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +47,7 @@ public class ItemsListActivity extends AppCompatActivity {
                                     Double.parseDouble(child.child("price").getValue().toString())
                             )
                     );
+                    Log.d(child.getKey(),child.getValue().toString());
                 }
                 recyclerView.setAdapter(new FoodItemsListAdapter(ItemsListActivity.this,foodItems));
             }
