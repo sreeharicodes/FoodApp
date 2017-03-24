@@ -52,8 +52,32 @@
         android:text="@string/add_to_cart"
         android:background="#366881"
         android:textColor="#fff"
+        android:id="@+id/addItemButton"
         android:layout_alignParentBottom="true"
         android:onClick="addItemToCart"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_item"
+        android:background="#366881"
+        android:textColor="#fff"
+        android:id="@+id/removeItemButton"
+        android:layout_alignParentBottom="true"
+        android:onClick="removeItemFromCart"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_cart"
+        android:background="#366881"
+        android:textColor="#fff"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/updateCartButton"
+        android:layout_above="@id/removeItemButton"
+        android:onClick="updateCartItem"/>
 
 
 
