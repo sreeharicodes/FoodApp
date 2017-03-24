@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FoodApp</string>
+    <string name="veg">Veg</string>
+    <string name="food_item_image_here">Food Item Image Here</string>
+    <string name="some_description_of_this_item">Some description of this item.</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="item_name_here">Item Name Here</string>
 </resources>

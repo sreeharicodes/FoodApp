@@ -10,4 +10,51 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wordpress.sreeharilive.foodapp.activity.FoodDescriptionActivity">
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/food_item_image_here"
+        android:id="@+id/foodItemImageView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/item_name_here"
+        android:id="@+id/itemNameTextView"
+        android:layout_below="@id/foodItemImageView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/itemNameTextView"
+        android:id="@+id/foodItemDescriptionTextView"
+        android:text="@string/some_description_of_this_item"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/foodItemDescriptionTextView"
+        android:id="@+id/foodQuantitySpinner"
+        android:layout_marginTop="8dp"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_cart"
+        android:background="#366881"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
+        android:onClick="addItemToCart"/>
+
+
+
 </RelativeLayout>

@@ -1,17 +1,47 @@
 package com.wordpress.sreeharilive.foodapp.model;
 
+import java.io.Serializable;
+
 /***
  * Created by negibabu on 3/18/17.
  */
 
-public class FoodItem {
-    private String name,category;
+public class FoodItem implements Serializable{
+    private String name,category,imageUrl, description;
     private double price;
+    private int quantity = 0;
 
-    public FoodItem(String name, String category, double price) {
+
+    public FoodItem(String name, String category, double price, String imageUrl, String description) {
         this.name = name;
         this.category = category;
         this.price = price;
+        this.imageUrl = imageUrl;
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {

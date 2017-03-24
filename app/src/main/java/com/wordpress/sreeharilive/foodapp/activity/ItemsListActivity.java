@@ -14,10 +14,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.wordpress.sreeharilive.foodapp.R;
 import com.wordpress.sreeharilive.foodapp.adapter.FoodItemsListAdapter;
 import com.wordpress.sreeharilive.foodapp.model.FoodItem;
+import com.wordpress.sreeharilive.foodapp.util.Constants;
 
 import java.util.ArrayList;
 
 public class ItemsListActivity extends AppCompatActivity {
+
+    String selectedCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +33,12 @@ public class ItemsListActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
+        selectedCategory = getIntent().getStringExtra(Constants.CATEGORY_INTENT_KEY);
+
 
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.getReference().child("items").child("NonVeg").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("items").child(selectedCategory).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -43,8 +48,10 @@ public class ItemsListActivity extends AppCompatActivity {
                     foodItems.add(
                             new FoodItem(
                                     child.child("name").getValue().toString(),
-                                    "Non Veg",
-                                    Double.parseDouble(child.child("price").getValue().toString())
+                                    selectedCategory,
+                                    Double.parseDouble(child.child("price").getValue().toString()),
+                                    child.child("imageurl").getValue().toString(),
+                                    child.child("description").getValue().toString()
                             )
                     );
                     Log.d(child.getKey(),child.getValue().toString());
