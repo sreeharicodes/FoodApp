@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         if (requestCode == SIGN_IN_REQUEST_CONST) {
             // Successfully signed in
             if (resultCode == ResultCodes.OK) {
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,Login.class));
                 finish();
             } else {
                 if (resultCode == RESULT_CANCELED){
