@@ -13,7 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.wordpress.sreeharilive.foodapp.activity.MainActivity;
+import com.wordpress.sreeharilive.foodapp.activity.Login;
 
 /**
  * Created by negibabu on 3/26/17.
@@ -30,7 +30,7 @@ public class FcmMessagingService extends FirebaseMessagingService{
             message=remoteMessage.getData().get("message");
             img_url=remoteMessage.getData().get("img_url");
 
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Login.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
             Uri sounduri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
