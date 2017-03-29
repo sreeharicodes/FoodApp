@@ -70,7 +70,7 @@ public class CheckoutActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        Order order = new Order.OrderBuilder(this)
+        new Order.OrderBuilder()
                 .setLocality(localities[localitySpinner.getSelectedItemPosition()])
                 .setAddress(address)
                 .setCart(Cart.getInstance())
@@ -85,13 +85,12 @@ public class CheckoutActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError() {
-                        Toast.makeText(CheckoutActivity.this, "Sorry Something Happened. Try again later", Toast.LENGTH_SHORT).show();
-                        progressDialog.cancel();
+                    public void onError(Order.OrderException e) {
+                        Toast.makeText(CheckoutActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .build();
-        order.place();
+                .build()
+                .place();
 
     }
 }

@@ -1,28 +1,29 @@
 package com.wordpress.sreeharilive.foodapp.model;
 
 
-import android.content.Context;
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.wordpress.sreeharilive.foodapp.Cart;
+import com.wordpress.sreeharilive.foodapp.util.RandomIdGenerator;
 
 
 public class Order {
 
-    private Context context;
-    private String locality;
-    private String address;
-    private String modeOfPayment;
+    private String locality = "";
+    private String address = "";
+    private String modeOfPayment = "";
     private Cart cart;
-    private String uid;
+    private String uid = "";
     private OnOrderCompleteListener onOrderCompleteListener;
+    private String orderId;
 
     public interface OnOrderCompleteListener {
         void onComplete();
-        void onError();
+        void onError(OrderException e);
     }
 
-    private Order(Context context) {
-        this.context = context;
+    private Order() {
+        this.orderId = RandomIdGenerator.newId();
     }
 
     private void setOnOrderCompleteListener(OnOrderCompleteListener onOrderCompleteListener) {
@@ -50,15 +51,50 @@ public class Order {
     }
 
     public void place() {
-
+        if (uid.isEmpty()){
+            onOrderCompleteListener.onError(new OrderException("Invalid UID"));
+            return;
+        }
+        if (modeOfPayment.isEmpty()){
+            onOrderCompleteListener.onError(new OrderException("Invalid Payment Mode"));
+            return;
+        }
+        if (address.isEmpty()){
+            onOrderCompleteListener.onError(new OrderException("Address Empty"));
+            return;
+        }
+        if (locality.isEmpty()){
+            onOrderCompleteListener.onError(new OrderException("Locality Empty"));
+            return;
+        }
+        if (cart == null){
+            onOrderCompleteListener.onError(new OrderException("Cart is Empty"));
+            return;
+        }
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference()
+                .child("orders")
+                .child(orderId);
+        database.child("userId").setValue(uid);
+        database.child("locality").setValue(locality);
+        database.child("address").setValue(address);
+        database.child("mode_of_payment").setValue(modeOfPayment);
+        DatabaseReference ordersList = database.child("order");
+        for (FoodItem item : cart.getCartList()){
+            DatabaseReference thisItem = ordersList.child(RandomIdGenerator.newId());
+            thisItem.child("item").setValue(item.getName());
+            thisItem.child("category").setValue(item.getName());
+            thisItem.child("quantity").setValue(item.getQuantity());
+        }
+        ordersList.child("total").setValue(cart.getTotal());
+        onOrderCompleteListener.onComplete();
     }
 
     public static class OrderBuilder {
 
         Order order;
 
-        public OrderBuilder(Context context) {
-            order = new Order(context);
+        public OrderBuilder() {
+            order = new Order();
         }
 
         public OrderBuilder setLocality(String locality) {
@@ -94,6 +130,17 @@ public class Order {
         public OrderBuilder setOrderCompleteListener(OnOrderCompleteListener onOrderCompleteListener) {
             order.setOnOrderCompleteListener(onOrderCompleteListener);
             return this;
+        }
+    }
+
+    public class OrderException {
+        private String message;
+        OrderException(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
         }
     }
 }
