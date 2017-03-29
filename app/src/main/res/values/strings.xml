@@ -12,4 +12,6 @@
     <string name="select_locality">Select Locality</string>
     <string name="mode_of_payment">Mode of Payment</string>
     <string name="address">Address</string>
+    <string name="available">Available</string>
+    <string name="out_of_stock">Out Of Stock</string>
 </resources>

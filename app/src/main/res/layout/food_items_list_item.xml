@@ -13,7 +13,7 @@
             android:layout_height="150dp"
             android:src="@mipmap/ic_launcher"
             android:id="@+id/foodImageView"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerInside"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,15 +22,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Item Name"
                 android:id="@+id/itemNameTextView"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Price"
                 android:id="@+id/priceTextView"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/inStockOrNotTextView"
                 android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>

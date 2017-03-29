@@ -2,12 +2,14 @@ package com.wordpress.sreeharilive.foodapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.wordpress.sreeharilive.foodapp.R;
@@ -53,38 +55,33 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
                 String.valueOf(foodItems.get(position).getPrice())
         );
 
-        holder.rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, FoodDescriptionActivity.class);
-                intent.putExtra(Constants.SELECTED_ITEM_KEY,foodItems.get(holder.getAdapterPosition()));
-                context.startActivity(intent);
-            }
-        });
 
-        Picasso.with(context).load(foodItems.get(position).getImageUrl()).into(holder.imageView);
+        if (foodItems.get(holder.getAdapterPosition()).getCount()>0){
+            holder.outOfStockOrNotTextView.setText(R.string.available);
 
-        /*switch (foodItems.get(position).getName().toLowerCase()){
-            case "biriyani": holder.imageView.setImageResource(
-                    R.mipmap.ic_launcher
-            );
-                break;
-            case "fried rice": holder.imageView.setImageResource(
-                    R.mipmap.ic_launcher
-            );
-                break;
-            case "butter chicken": holder.imageView.setImageResource(
-                    R.mipmap.ic_launcher
-            );
-                break;
-            case "veg curry": holder.imageView.setImageResource(
-                    R.mipmap.ic_launcher
-            );
-                break;
-            default: holder.imageView.setImageResource(
-                    R.mipmap.ic_launcher
-            );
-        }*/
+            holder.rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, FoodDescriptionActivity.class);
+                    intent.putExtra(Constants.SELECTED_ITEM_KEY,foodItems.get(holder.getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });
+        }else {
+            holder.outOfStockOrNotTextView.setText(R.string.out_of_stock);
+            holder.rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Out of stock!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        Picasso.with(context)
+                .load(foodItems.get(position).getImageUrl())
+                .placeholder(ContextCompat.getDrawable(context,R.drawable.ic_hourglass_full_black_24dp))
+                .into(holder.imageView);
+
 
     }
 
@@ -96,7 +93,7 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView nameTextView, priceTextView;
+        TextView nameTextView, priceTextView, outOfStockOrNotTextView;
         View rootView;
 
         ViewHolder(View itemView) {
@@ -105,6 +102,7 @@ public class FoodItemsListAdapter extends RecyclerView.Adapter<FoodItemsListAdap
             imageView = (ImageView) itemView.findViewById(R.id.foodImageView);
             nameTextView = (TextView) itemView.findViewById(R.id.itemNameTextView);
             priceTextView = (TextView) itemView.findViewById(R.id.priceTextView);
+            outOfStockOrNotTextView = (TextView) itemView.findViewById(R.id.inStockOrNotTextView);
             rootView = itemView;
 
         }

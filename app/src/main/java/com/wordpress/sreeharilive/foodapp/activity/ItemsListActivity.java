@@ -1,5 +1,6 @@
 package com.wordpress.sreeharilive.foodapp.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +38,12 @@ public class ItemsListActivity extends AppCompatActivity {
 
         selectedCategory = getIntent().getStringExtra(Constants.CATEGORY_INTENT_KEY);
 
+        getSupportActionBar().setTitle(selectedCategory);
 
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference().child("items").child(selectedCategory).addValueEventListener(new ValueEventListener() {
@@ -61,6 +67,7 @@ public class ItemsListActivity extends AppCompatActivity {
                     Log.d(child.getKey(),child.getValue().toString());
                 }
                 recyclerView.setAdapter(new FoodItemsListAdapter(ItemsListActivity.this,foodItems));
+                progressDialog.cancel();
             }
 
             @Override
