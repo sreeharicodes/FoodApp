@@ -42,5 +42,7 @@ public class CartActivity extends AppCompatActivity {
         Toast.makeText(this, "Total = " + Cart.getInstance().getTotal(), Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(this, CheckoutActivity.class));
+
+        finish();
     }
 }

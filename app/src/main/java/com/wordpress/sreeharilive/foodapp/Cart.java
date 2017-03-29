@@ -27,10 +27,6 @@ public class Cart{
         cartList.add(item);
     }
 
-    public void removeFromCart(FoodItem item){
-        cartList.remove(item);
-    }
-
     public static Cart getInstance(){
         if(cart == null){
             cart = new Cart();
@@ -44,5 +40,9 @@ public class Cart{
             total += item.getPrice() * item.getQuantity();
         }
         return total;
+    }
+
+    public void clearCart() {
+        cart = new Cart();
     }
 }

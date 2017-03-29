@@ -81,6 +81,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     public void onComplete() {
                         Toast.makeText(CheckoutActivity.this, "Placed Your Order Successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.cancel();
+                        Cart.getInstance().clearCart();
                         finish();
                     }
 
