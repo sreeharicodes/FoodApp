@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [onesignal_app_id: "26081e64-740f-4171-bb7c-b7041aa2be40",
+        manifestPlaceholders = [onesignal_app_id               : "26081e64-740f-4171-bb7c-b7041aa2be40",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "759819859475"]
     }
@@ -27,22 +27,23 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    testCompile 'junit:junit:4.12'
 
     // Single target that includes all FirebaseUI libraries
+    
+
+    // Required for OneSignal, even if you have added FCM.
+    
+    // Required for geotagging
+    
+    compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.firebaseui:firebase-ui:1.2.0'
     compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.volley:volley:1.0.0'
-
     compile 'com.onesignal:OneSignal:3.4.3@aar'
-
-    // Required for OneSignal, even if you have added FCM.
     compile 'com.google.android.gms:play-services-gcm:10.2.0'
-
-    // Required for geotagging
-    compile "com.google.android.gms:play-services-location:10.2.0"
-
+    compile 'com.google.android.gms:play-services-location:10.2.0'
+    compile 'com.android.support.constraint:constraint-layout:+'
+    testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'
