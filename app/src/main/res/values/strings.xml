@@ -9,4 +9,7 @@
     <string name="checkout">Checkout</string>
     <string name="remove_item">Remove Item</string>
     <string name="update_cart">Update Cart</string>
+    <string name="select_locality">Select Locality</string>
+    <string name="mode_of_payment">Mode of Payment</string>
+    <string name="address">Address</string>
 </resources>

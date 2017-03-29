@@ -10,4 +10,58 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wordpress.sreeharilive.foodapp.activity.CheckoutActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_locality"
+        android:id="@+id/selectLocalityLabel"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/localitiesSpinner"
+        android:layout_below="@id/selectLocalityLabel"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mode_of_payment"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/localitiesSpinner"
+        android:id="@+id/paymentModeLabel"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/paymentsSpinner"
+        android:layout_below="@id/paymentModeLabel"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addressInputLayout"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/paymentsSpinner">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addressET"
+            android:lines="5"
+            android:inputType="textPostalAddress"
+            android:hint="@string/address"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_chevron_right_black_24dp"
+        android:layout_alignParentEnd="true"
+        android:onClick="finishCheckout"
+        android:id="@+id/nextFab"/>
+
 </RelativeLayout>

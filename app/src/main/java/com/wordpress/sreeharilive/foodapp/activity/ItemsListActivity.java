@@ -49,6 +49,7 @@ public class ItemsListActivity extends AppCompatActivity {
                 for(DataSnapshot child : iterable){
                     foodItems.add(
                             new FoodItem(
+                                    child.getKey(),
                                     child.child("name").getValue().toString(),
                                     selectedCategory,
                                     Double.parseDouble(child.child("price").getValue().toString()),

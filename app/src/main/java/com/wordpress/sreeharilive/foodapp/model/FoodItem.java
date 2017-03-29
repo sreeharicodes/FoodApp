@@ -7,17 +7,25 @@ import java.io.Serializable;
  */
 
 public class FoodItem implements Serializable{
-    private String name,category,imageUrl, description;
+    private String name,category,imageUrl, description,fid;
     private double price;
     private int quantity = 0;
 
 
-    public FoodItem(String name, String category, double price, String imageUrl, String description) {
+    public FoodItem(String fid, String name, String category, double price, String imageUrl, String description) {
         this.name = name;
         this.category = category;
         this.price = price;
         this.imageUrl = imageUrl;
         this.description = description;
+    }
+
+    public String getFid() {
+        return fid;
+    }
+
+    public void setFid(String fid) {
+        this.fid = fid;
     }
 
     public String getImageUrl() {
