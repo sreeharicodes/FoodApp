@@ -86,7 +86,7 @@ public class Order {
         database.child("mode_of_payment").setValue(modeOfPayment);
         DatabaseReference ordersList = database.child("order");
         for (final FoodItem item : cart.getCartList()){
-            DatabaseReference thisItem = ordersList.child(item.getCategory());
+            DatabaseReference thisItem = ordersList.child(RandomIdGenerator.newId());
             thisItem.child("item").setValue(item.getName());
             thisItem.child("category").setValue(item.getCategory());
             thisItem.child("fid").setValue(item.getFid());

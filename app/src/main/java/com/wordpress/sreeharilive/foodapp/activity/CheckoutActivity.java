@@ -11,6 +11,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.wordpress.sreeharilive.foodapp.Cart;
 import com.wordpress.sreeharilive.foodapp.R;
 import com.wordpress.sreeharilive.foodapp.model.Order;
@@ -26,19 +30,15 @@ public class CheckoutActivity extends AppCompatActivity {
             "Online Payment"
     };
 
-    String[] localities = {
-            "Kalady",
-            "Kanjoor",
-            "Aluva",
-            "Angamaly",
-            "Perumbavoor",
-            "Malayatoor"
-    };
+    String localities[];
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+
 
         paymentsModeSpinner = (Spinner) findViewById(R.id.paymentsSpinner);
         localitySpinner = (Spinner) findViewById(R.id.localitiesSpinner);
@@ -46,13 +46,39 @@ public class CheckoutActivity extends AppCompatActivity {
         addressET = (EditText) findViewById(R.id.addressET);
         addressInputLayout = (TextInputLayout) findViewById(R.id.addressInputLayout);
 
-        ArrayAdapter<String> localitiesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, localities);
-        localitiesAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-        localitySpinner.setAdapter(localitiesAdapter);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
 
-        ArrayAdapter<String> paymentsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, modeOfPayments);
-        paymentsAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-        paymentsModeSpinner.setAdapter(paymentsAdapter);
+        FirebaseDatabase.getInstance().getReference().child("loc")
+                .addValueEventListener(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                int i = 0;
+                                localities = new String[(int) dataSnapshot.getChildrenCount()];
+                                for (DataSnapshot loc : dataSnapshot.getChildren()){
+                                    localities[i++] = loc.child("l").getValue().toString();
+                                }
+                                progressDialog.dismiss();
+
+                                ArrayAdapter<String> localitiesAdapter = new ArrayAdapter<>(CheckoutActivity.this, android.R.layout.simple_spinner_item, localities);
+                                localitiesAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+                                localitySpinner.setAdapter(localitiesAdapter);
+
+                                ArrayAdapter<String> paymentsAdapter = new ArrayAdapter<>(CheckoutActivity.this, android.R.layout.simple_spinner_item, modeOfPayments);
+                                paymentsAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+                                paymentsModeSpinner.setAdapter(paymentsAdapter);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        }
+                );
+
+
 
     }
 
@@ -65,9 +91,6 @@ public class CheckoutActivity extends AppCompatActivity {
 
         String modeOfPayment = modeOfPayments[paymentsModeSpinner.getSelectedItemPosition()];
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
         progressDialog.show();
 
         new Order.OrderBuilder()
