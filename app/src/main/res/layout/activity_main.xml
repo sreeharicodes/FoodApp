@@ -25,7 +25,7 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/burger"
+                android:src="@drawable/veg"
                 android:scaleType="centerInside"
                 android:id="@+id/vegImageView"
                 android:onClick="launchMenu"

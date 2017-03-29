@@ -1,5 +1,6 @@
 package com.wordpress.sreeharilive.foodapp.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,5 +40,6 @@ public class CartActivity extends AppCompatActivity {
 
     public void checkOut(View view) {
         Toast.makeText(this, "Total = " + Cart.getInstance().getTotal(), Toast.LENGTH_SHORT).show();
+        
     }
 }
