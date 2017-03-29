@@ -19,6 +19,7 @@ public class Order {
     private String uid = "";
     private OnOrderCompleteListener onOrderCompleteListener;
     private String orderId;
+    private long timeStamp;
 
     public interface OnOrderCompleteListener {
         void onComplete();
@@ -27,6 +28,7 @@ public class Order {
 
     private Order() {
         this.orderId = RandomIdGenerator.newId();
+        this.timeStamp = System.currentTimeMillis();
     }
 
     private void setOnOrderCompleteListener(OnOrderCompleteListener onOrderCompleteListener) {
@@ -80,6 +82,7 @@ public class Order {
         database.child("userId").setValue(uid);
         database.child("locality").setValue(locality);
         database.child("address").setValue(address);
+        database.child("timestamp").setValue(timeStamp);
         database.child("mode_of_payment").setValue(modeOfPayment);
         DatabaseReference ordersList = database.child("order");
         for (final FoodItem item : cart.getCartList()){
@@ -107,6 +110,12 @@ public class Order {
             });
         }
         ordersList.child("total").setValue(cart.getTotal());
+        FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(uid)
+                .child("pending_orders")
+                .child(orderId)
+                .setValue(timeStamp);
         onOrderCompleteListener.onComplete();
     }
 
