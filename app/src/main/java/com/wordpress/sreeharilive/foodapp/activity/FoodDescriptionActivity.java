@@ -56,7 +56,20 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         itemNameTextView.setText(item.getName());
         itemDescTextView.setText(item.getDescription());
 
-        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,new Integer[]{1,2,3,4,5,6,7,8,9,10});
+        Integer qtySpinnerArr[];
+        if (item.getCount() > 10) {
+            qtySpinnerArr = new Integer[10];
+            for (int i = 0; i < 10; i++){
+                qtySpinnerArr[i]=i+1;
+            }
+        }else {
+            qtySpinnerArr = new Integer[item.getCount()];
+            for (int i = 0; i < item.getCount(); i++){
+                qtySpinnerArr[i]=i+1;
+            }
+        }
+
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,qtySpinnerArr);
         arrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
         qtySpinner.setAdapter(arrayAdapter);
 
