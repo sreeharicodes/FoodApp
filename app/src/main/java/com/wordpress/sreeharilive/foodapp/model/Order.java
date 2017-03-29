@@ -1,8 +1,11 @@
 package com.wordpress.sreeharilive.foodapp.model;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.wordpress.sreeharilive.foodapp.Cart;
 import com.wordpress.sreeharilive.foodapp.util.RandomIdGenerator;
 
@@ -79,11 +82,29 @@ public class Order {
         database.child("address").setValue(address);
         database.child("mode_of_payment").setValue(modeOfPayment);
         DatabaseReference ordersList = database.child("order");
-        for (FoodItem item : cart.getCartList()){
+        for (final FoodItem item : cart.getCartList()){
             DatabaseReference thisItem = ordersList.child(RandomIdGenerator.newId());
             thisItem.child("item").setValue(item.getName());
             thisItem.child("category").setValue(item.getCategory());
             thisItem.child("quantity").setValue(item.getQuantity());
+            FirebaseDatabase.getInstance().getReference().child("items")
+                    .child(item.getCategory())
+                    .child(item.getFid())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    FirebaseDatabase.getInstance().getReference().child("items")
+                            .child(item.getCategory())
+                            .child(item.getFid())
+                            .child("count")
+                            .setValue(((int)dataSnapshot.getValue()) - 1);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
         ordersList.child("total").setValue(cart.getTotal());
         onOrderCompleteListener.onComplete();
