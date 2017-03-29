@@ -14,4 +14,5 @@
     <string name="address">Address</string>
     <string name="available">Available</string>
     <string name="out_of_stock">Out Of Stock</string>
+    <string name="item_image">Item Image</string>
 </resources>

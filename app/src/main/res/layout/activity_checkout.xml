@@ -14,12 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_locality"
+        android:textColor="@color/primary_text"
         android:id="@+id/selectLocalityLabel"/>
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textColor="@color/primary_text"
         android:id="@+id/localitiesSpinner"
         android:layout_below="@id/selectLocalityLabel"/>
 
@@ -29,6 +31,7 @@
         android:layout_height="wrap_content"
         android:text="@string/mode_of_payment"
         android:layout_marginTop="8dp"
+        android:textColor="@color/primary_text"
         android:layout_below="@id/localitiesSpinner"
         android:id="@+id/paymentModeLabel"/>
 
@@ -37,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:id="@+id/paymentsSpinner"
+        android:textColor="@color/primary_text"
         android:layout_below="@id/paymentModeLabel"/>
 
     <android.support.design.widget.TextInputLayout
@@ -50,6 +54,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/addressET"
             android:lines="5"
+            android:textColor="@color/primary_text"
             android:inputType="textPostalAddress"
             android:hint="@string/address"/>
     </android.support.design.widget.TextInputLayout>

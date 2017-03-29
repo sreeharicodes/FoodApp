@@ -4,9 +4,6 @@
     android:id="@+id/activity_food_description"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wordpress.sreeharilive.foodapp.activity.FoodDescriptionActivity">
 
@@ -16,6 +13,8 @@
         android:layout_height="150dp"
         android:src="@mipmap/ic_launcher"
         android:scaleType="centerInside"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:contentDescription="@string/food_item_image_here"
         android:id="@+id/foodItemImageView"/>
 
@@ -25,6 +24,8 @@
         android:text="@string/item_name_here"
         android:id="@+id/itemNameTextView"
         android:layout_below="@id/foodItemImageView"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="center"/>
 
@@ -35,6 +36,8 @@
         android:id="@+id/foodItemDescriptionTextView"
         android:text="@string/some_description_of_this_item"
         android:layout_marginTop="8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
@@ -42,6 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/foodItemDescriptionTextView"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/foodQuantitySpinner"
         android:layout_marginTop="8dp"
         android:gravity="center"/>
@@ -50,8 +55,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_to_cart"
-        android:background="#366881"
-        android:textColor="#fff"
+        android:background="@color/colorAccent"
+        android:textColor="@color/icons"
         android:id="@+id/addItemButton"
         android:layout_alignParentBottom="true"
         android:onClick="addItemToCart"/>
@@ -61,8 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/remove_item"
-        android:background="#366881"
-        android:textColor="#fff"
+        android:background="@color/colorAccent"
+        android:textColor="@color/icons"
         android:id="@+id/removeItemButton"
         android:layout_alignParentBottom="true"
         android:onClick="removeItemFromCart"/>
@@ -72,8 +77,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/update_cart"
-        android:background="#366881"
-        android:textColor="#fff"
+        android:background="@color/colorAccent"
+        android:textColor="@color/icons"
         android:layout_marginBottom="8dp"
         android:id="@+id/updateCartButton"
         android:layout_above="@id/removeItemButton"
