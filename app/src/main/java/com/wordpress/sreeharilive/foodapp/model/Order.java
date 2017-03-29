@@ -82,7 +82,7 @@ public class Order {
         for (FoodItem item : cart.getCartList()){
             DatabaseReference thisItem = ordersList.child(RandomIdGenerator.newId());
             thisItem.child("item").setValue(item.getName());
-            thisItem.child("category").setValue(item.getName());
+            thisItem.child("category").setValue(item.getCategory());
             thisItem.child("quantity").setValue(item.getQuantity());
         }
         ordersList.child("total").setValue(cart.getTotal());
