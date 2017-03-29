@@ -45,4 +45,8 @@ public class Cart{
     public void clearCart() {
         cart = new Cart();
     }
+
+    public boolean isEmpty() {
+        return cartList.isEmpty();
+    }
 }

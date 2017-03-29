@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.wordpress.sreeharilive.foodapp.Cart;
 import com.wordpress.sreeharilive.foodapp.R;
 import com.wordpress.sreeharilive.foodapp.util.Constants;
 
@@ -50,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_cart:
-                startActivity(new Intent(this,CartActivity.class));
+                if (!Cart.getInstance().isEmpty())
+                    startActivity(new Intent(this,CartActivity.class));
+                else
+                    Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show();
                 break;
         }
 

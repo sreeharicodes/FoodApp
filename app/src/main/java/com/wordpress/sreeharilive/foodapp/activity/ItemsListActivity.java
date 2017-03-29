@@ -9,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.wordpress.sreeharilive.foodapp.Cart;
 import com.wordpress.sreeharilive.foodapp.R;
 import com.wordpress.sreeharilive.foodapp.adapter.FoodItemsListAdapter;
 import com.wordpress.sreeharilive.foodapp.model.FoodItem;
@@ -92,7 +94,10 @@ public class ItemsListActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_cart:
-                startActivity(new Intent(this,CartActivity.class));
+                if (!Cart.getInstance().isEmpty())
+                    startActivity(new Intent(this,CartActivity.class));
+                else
+                    Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show();
                 break;
         }
 

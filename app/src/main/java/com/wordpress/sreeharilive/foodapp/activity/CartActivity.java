@@ -39,10 +39,16 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void checkOut(View view) {
-        Toast.makeText(this, "Total = " + Cart.getInstance().getTotal(), Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(this, CheckoutActivity.class));
+        if (Cart.getInstance().isEmpty()){
+            Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "Total = " + Cart.getInstance().getTotal(), Toast.LENGTH_SHORT).show();
 
-        finish();
+            startActivity(new Intent(this, CheckoutActivity.class));
+
+            finish();
+        }
+
     }
 }

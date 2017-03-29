@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.wordpress.sreeharilive.foodapp.Cart;
@@ -96,7 +97,10 @@ public class FoodDescriptionActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_cart:
-                startActivity(new Intent(this,CartActivity.class));
+                if (!Cart.getInstance().isEmpty())
+                    startActivity(new Intent(this,CartActivity.class));
+                else
+                    Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show();
                 break;
         }
 
