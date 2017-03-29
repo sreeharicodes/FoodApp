@@ -97,7 +97,7 @@ public class Order {
                             .child(item.getCategory())
                             .child(item.getFid())
                             .child("count")
-                            .setValue(((int)dataSnapshot.getValue()) - 1);
+                            .setValue((Integer.parseInt(dataSnapshot.child("count").getValue().toString())) - item.getQuantity());
                 }
 
                 @Override

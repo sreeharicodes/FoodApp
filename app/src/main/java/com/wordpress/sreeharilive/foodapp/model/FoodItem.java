@@ -9,15 +9,25 @@ import java.io.Serializable;
 public class FoodItem implements Serializable{
     private String name,category,imageUrl, description,fid;
     private double price;
-    private int quantity = 0;
+    private int quantity = 0, count;
 
 
-    public FoodItem(String fid, String name, String category, double price, String imageUrl, String description) {
+    public FoodItem(String fid, String name, String category, double price, String imageUrl, String description, int count) {
         this.name = name;
         this.category = category;
         this.price = price;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.fid = fid;
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getFid() {
