@@ -18,4 +18,7 @@
     <string name="history">History</string>
     <string name="close">close</string>
     <string name="open">open</string>
+    <string name="johndoe_abc_com">johndoe@abc.com</string>
+    <string name="avatar">Avatar</string>
+    <string name="_2017">© 2017</string>
 </resources>
