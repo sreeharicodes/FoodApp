@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activity.CartActivity"
             android:parentActivityName=".activity.MainActivity"/>
         <activity android:name=".activity.ItemsListActivity"
