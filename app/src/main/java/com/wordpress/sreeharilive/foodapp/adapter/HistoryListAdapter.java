@@ -2,6 +2,7 @@ package com.wordpress.sreeharilive.foodapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -24,7 +25,9 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
     @Override
     public HistoryListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.history_list_item,parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -37,7 +40,11 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         long deliveryTimeInMillis = items.get(position).getDeliveryTimeStamp();
 
         holder.orderTimeTV.setText(getTimeAsString(orderTimeInMillis));
-        holder.deliveryTimeTV.setText(getTimeAsString(deliveryTimeInMillis));
+
+        if (deliveryTimeInMillis != 0)
+            holder.deliveryTimeTV.setText(getTimeAsString(deliveryTimeInMillis));
+        else
+            holder.deliveryTimeTV.setText("Not Yet Delivered");
 
         holder.dateTV.setText(getDateStringFrom(orderTimeInMillis));
 

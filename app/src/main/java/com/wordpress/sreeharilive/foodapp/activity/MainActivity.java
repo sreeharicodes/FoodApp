@@ -95,5 +95,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchHistory(View view) {
+        startActivity(new Intent(this,HistoryActivity.class));
     }
 }
