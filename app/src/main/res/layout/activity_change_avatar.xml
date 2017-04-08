@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wordpress.sreeharilive.foodapp.activity.ChangeAvatarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_1"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarOne"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_2"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarTwo"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_3"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarThree"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_4"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarFour"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_5"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarFive"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_6"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarSix"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_7"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarSeven"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_8"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarEight"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_9"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarNine"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_10"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarTen"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:contentDescription="@string/avatar"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_11"
+                android:onClick="chooseAvatar"
+                android:id="@+id/avatarEleven"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

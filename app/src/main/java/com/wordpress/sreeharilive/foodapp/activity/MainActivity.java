@@ -11,13 +11,21 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.wordpress.sreeharilive.foodapp.Cart;
 import com.wordpress.sreeharilive.foodapp.R;
 import com.wordpress.sreeharilive.foodapp.util.Constants;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
+
+    ImageView profileImageView;
+    TextView emailIdTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,68 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        profileImageView = (ImageView) findViewById(R.id.avatarImageView);
+        emailIdTextView = (TextView) findViewById(R.id.emailIdTextView);
+        emailIdTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+        setAvatar();
+
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ChangeAvatarActivity.class));
+            }
+        });
+
+
+    }
+
+    private void setAvatar() {
+        switch (getSelectedAvatar()){
+            case 1:
+                profileImageView.setImageResource(R.drawable.avatar_1);
+                break;
+            case 2:
+                profileImageView.setImageResource(R.drawable.avatar_2);
+                break;
+            case 3:
+                profileImageView.setImageResource(R.drawable.avatar_3);
+                break;
+            case 4:
+                profileImageView.setImageResource(R.drawable.avatar_4);
+                break;
+            case 5:
+                profileImageView.setImageResource(R.drawable.avatar_5);
+                break;
+            case 6:
+                profileImageView.setImageResource(R.drawable.avatar_6);
+                break;
+            case 7:
+                profileImageView.setImageResource(R.drawable.avatar_7);
+                break;
+            case 8:
+                profileImageView.setImageResource(R.drawable.avatar_8);
+                break;
+            case 9:
+                profileImageView.setImageResource(R.drawable.avatar_9);
+                break;
+            case 10:
+                profileImageView.setImageResource(R.drawable.avatar_10);
+                break;
+            case 11:
+                profileImageView.setImageResource(R.drawable.avatar_11);
+                break;
+        }
+    }
+
+    private int getSelectedAvatar() {
+        return getSharedPreferences("prefs",MODE_PRIVATE).getInt("AVATAR",new Random().nextInt(11));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setAvatar();
     }
 
     @Override
