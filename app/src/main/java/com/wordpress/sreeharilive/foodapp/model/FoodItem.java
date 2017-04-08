@@ -22,6 +22,13 @@ public class FoodItem implements Serializable{
         this.count = count;
     }
 
+    public FoodItem(String fid, String name, String category, int quantity){
+        this.name = name;
+        this.fid = fid;
+        this.category = category;
+        this.quantity = quantity;
+    }
+
     public int getCount() {
         return count;
     }
