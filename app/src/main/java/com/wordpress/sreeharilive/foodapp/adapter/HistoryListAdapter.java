@@ -33,7 +33,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
     @Override
     public void onBindViewHolder(HistoryListAdapter.ViewHolder holder, int position) {
 
-        holder.totalTV.setText("Total Amount= ₹" + String.valueOf(items.get(position).getTotal()) + "/-");
+        holder.totalTV.setText("Total Amount= ₹ " + String.valueOf(items.get(position).getTotal()) + "/-");
         holder.modeTV.setText(items.get(position).getMode());
 
         long orderTimeInMillis = items.get(position).getOrderTimeStamp();
@@ -42,9 +42,9 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         holder.orderTimeTV.setText(getTimeAsString(orderTimeInMillis));
 
         if (deliveryTimeInMillis != 0)
-            holder.deliveryTimeTV.setText(getTimeAsString(deliveryTimeInMillis));
+            holder.deliveryTimeTV.setText(String.format("Delivered at: %s", getTimeAsString(deliveryTimeInMillis)));
         else
-            holder.deliveryTimeTV.setText("Not Yet Delivered");
+            holder.deliveryTimeTV.setText(R.string.not_yet_delivered);
 
         holder.dateTV.setText(getDateStringFrom(orderTimeInMillis));
 
@@ -140,7 +140,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
             minuteString = String.valueOf(minutes);
         }
 
-        return hourString + ":" + minuteString + " " + period;
+        return hourString + " : " + minuteString + " " + period;
 
     }
 
