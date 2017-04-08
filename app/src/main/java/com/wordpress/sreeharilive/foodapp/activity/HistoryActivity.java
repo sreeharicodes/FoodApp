@@ -1,6 +1,7 @@
 package com.wordpress.sreeharilive.foodapp.activity;
 
 import android.app.ProgressDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,10 +22,27 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_history);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
+
+        refresh();
+
+    }
+
+    private void refresh() {
+
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.historyList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -36,7 +54,7 @@ public class HistoryActivity extends AppCompatActivity {
         progressDialog.show();
 
         FirebaseDatabase.getInstance().getReference().child("orders")
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         final ArrayList<HistoryItem> items = new ArrayList<>();
@@ -66,7 +84,7 @@ public class HistoryActivity extends AppCompatActivity {
                         }
                         progressDialog.setMessage("Fetching delivered orders...");
                         FirebaseDatabase.getInstance().getReference().child("processed_orders")
-                                .addValueEventListener(new ValueEventListener() {
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         try {
@@ -101,6 +119,7 @@ public class HistoryActivity extends AppCompatActivity {
                                         HistoryListAdapter adapter = new HistoryListAdapter(HistoryActivity.this,items);
                                         recyclerView.swapAdapter(adapter,true);
                                         progressDialog.dismiss();
+                                        swipeRefreshLayout.setRefreshing(false);
                                     }
 
                                     @Override
@@ -119,6 +138,5 @@ public class HistoryActivity extends AppCompatActivity {
 
                     }
                 });
-
     }
 }

@@ -96,5 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchHistory(View view) {
         startActivity(new Intent(this,HistoryActivity.class));
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
     }
 }
