@@ -1,6 +1,7 @@
 package com.wordpress.sreeharilive.foodapp.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,7 +22,7 @@ import com.wordpress.sreeharilive.foodapp.util.Constants;
 
 import java.util.ArrayList;
 
-public class FoodDescriptionActivity extends AppCompatActivity {
+public class FoodDescriptionActivity extends AppCompatActivity implements Cart.OnCartUpdateListener {
 
     FoodItem item;
     Spinner qtySpinner;
@@ -35,6 +36,8 @@ public class FoodDescriptionActivity extends AppCompatActivity {
     ArrayList<FoodItem> items;
     int postion;
 
+    Menu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,8 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         item = (FoodItem) getIntent().getSerializableExtra(Constants.SELECTED_ITEM_KEY);
 
         comingFromCart = getIntent().getBooleanExtra(Constants.FROM_CART_EXTRA_KEY,false);
+
+        Cart.getInstance().setOnCartUpdateListener(this);
 
         qtySpinner = (Spinner) findViewById(R.id.foodQuantitySpinner);
         itemNameTextView = (TextView) findViewById(R.id.itemNameTextView);
@@ -102,6 +107,8 @@ public class FoodDescriptionActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cart_menu,menu);
+        this.menu = menu;
+        onUpdate(Cart.getInstance().getCartList().size());
         return true;
     }
 
@@ -132,5 +139,13 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         items.add(postion,item);
         Cart.getInstance().updateCartList(items);
         finish();
+    }
+
+    @Override
+    public void onUpdate(int count) {
+
+        MenuItem itemCart = menu.findItem(R.id.action_cart);
+        LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
+        Cart.setBadgeCount(this, icon, count);
     }
 }

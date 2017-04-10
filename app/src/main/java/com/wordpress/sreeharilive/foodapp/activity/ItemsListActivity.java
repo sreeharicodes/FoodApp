@@ -2,6 +2,7 @@ package com.wordpress.sreeharilive.foodapp.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,9 +24,11 @@ import com.wordpress.sreeharilive.foodapp.util.Constants;
 
 import java.util.ArrayList;
 
-public class ItemsListActivity extends AppCompatActivity {
+public class ItemsListActivity extends AppCompatActivity implements Cart.OnCartUpdateListener{
 
     String selectedCategory;
+
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class ItemsListActivity extends AppCompatActivity {
         selectedCategory = getIntent().getStringExtra(Constants.CATEGORY_INTENT_KEY);
 
         getSupportActionBar().setTitle(selectedCategory);
+
+        Cart.getInstance().setOnCartUpdateListener(this);
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -82,10 +87,19 @@ public class ItemsListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            onUpdate(Cart.getInstance().getCartList().size());
+        }catch (NullPointerException ignored){}
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cart_menu,menu);
+        this.menu = menu;
+        onUpdate(Cart.getInstance().getCartList().size());
         return true;
     }
 
@@ -102,5 +116,13 @@ public class ItemsListActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    @Override
+    public void onUpdate(int count) {
+
+        MenuItem itemCart = menu.findItem(R.id.action_cart);
+        LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
+        Cart.setBadgeCount(this, icon, count);
     }
 }

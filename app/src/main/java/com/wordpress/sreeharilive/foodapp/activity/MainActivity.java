@@ -1,6 +1,7 @@
 package com.wordpress.sreeharilive.foodapp.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,10 +23,12 @@ import com.wordpress.sreeharilive.foodapp.util.Constants;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Cart.OnCartUpdateListener{
 
     ImageView profileImageView;
     TextView emailIdTextView;
+
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_container);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Cart.getInstance().setOnCartUpdateListener(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -103,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setAvatar();
+        try {
+            onUpdate(Cart.getInstance().getCartList().size());
+        }catch (NullPointerException ignored){}
     }
 
     @Override
@@ -145,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cart_menu,menu);
+        this.menu = menu;
+        onUpdate(Cart.getInstance().getCartList().size());
         return true;
     }
 
@@ -170,4 +180,13 @@ public class MainActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         }
     }
+
+    @Override
+    public void onUpdate(int count) {
+        MenuItem itemCart = menu.findItem(R.id.action_cart);
+        LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
+        Cart.setBadgeCount(this, icon, count);
+    }
+
+
 }
